@@ -39,3 +39,12 @@ void topview(Node* root){
         cout<<it.second<<" ";
     }
 }
+
+int maxDepth(Node* root){
+    if(root==NULL){
+        return 0;
+    }
+    int left_D = maxDepth(root->left);
+    int right_D = maxDepth(root->right);
+    return max(left_D,right_D)+1;
+}

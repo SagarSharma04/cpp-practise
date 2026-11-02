@@ -48,3 +48,17 @@ int maxDepth(Node* root){
     int right_D = maxDepth(root->right);
     return max(left_D,right_D)+1;
 }
+
+
+bool check_valid(Node* root, long long low, long long high){
+    if(root==NULL){
+        return true;
+    }
+    if(root->left <= low && root->right>=high){
+        return false;
+    }
+    return check_valid(root->left,low,root->data)&&(root->right,root->data,high);
+}
+isValidBST(Node* root){
+    return check_valid(root,LLONG_MIN,LLONG_MAX);
+}

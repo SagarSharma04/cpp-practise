@@ -62,3 +62,58 @@ bool check_valid(Node* root, long long low, long long high){
 isValidBST(Node* root){
     return check_valid(root,LLONG_MIN,LLONG_MAX);
 }
+
+void merge(int arr[],int st,int mid,int end){
+    int i=st;
+    int j = mid+1;
+    int nums[15];
+    int k=0;
+    while(i<=mid && j<= end){
+        if(arr[i]<=arr[j]){
+            nums[k] = arr[i];
+            i++;
+            k++;
+        }else{
+            nums[k] = arr[j];
+            j++;
+            k++;
+        }
+    }
+
+    while(i<=mid){
+        nums[k] = arr[i];
+        i++;
+        k++;
+    }
+
+    while(j<=end){
+        nums[k] = arr[j];
+        j++;
+        k++;
+    }
+
+    for(int x=0;x<k;x++){
+        arr[st+x] = nums[x];
+    }
+}
+
+void mergesort(int arr[],int st,int end){
+    if(st<end){
+        int mid = st + (end-st)/2;
+        mergesort(arr,st,mid);
+        mergesort(arr,mid+1,end);
+
+        merge(arr,st,mid,end);
+        
+    }
+}
+
+int main(){
+    int n = 9;
+    int arr[n] = {21,20,19,18,17,16,15,14,13};
+    mergesort(arr,0,n-1);
+    for(int i=0;i<n;i++){
+        cout<<arr[i]<<" ";
+    }
+    return 0;
+}

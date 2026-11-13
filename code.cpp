@@ -117,3 +117,20 @@ int main(){
     }
     return 0;
 }
+
+Node* LeastCommonAncestor(Node* root,Node* p,Node* q){
+    if(root==NULL) return NULL;
+    if(root==p || root==q){
+        return root;
+    }
+    Node* leftLCA = LeastCommonAncestor(root->left,p,q);
+    Node* rightLCA = LeastCommonAncestor(root->right,p,q);
+    if(leftLCA && rightLCA){
+        return root;
+    }
+    else if(leftLCA!=NULL){
+        return leftLCA;
+    }else{
+        return rightLCA;
+    }
+}
